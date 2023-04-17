@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import domein.AlbumBean;
 import domein.ExpertBean;
+import persistence.BoekRepository;
 
 @Controller
 @RequestMapping("welcome")
@@ -19,6 +20,9 @@ public class WelcomeController {
 
     @Autowired
     private ExpertBean expertBean;
+
+    @Autowired
+    private BoekRepository boekRepository;
 
     @ModelAttribute("albumList")
     public List<String> populateColors() {

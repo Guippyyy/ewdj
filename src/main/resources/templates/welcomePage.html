@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>Book club</title>
   </head>
   <body>
-    <h1>Welcome page</h1>
+    <h1>Welcome to the Spring Boot Book Club</h1>
+    <h2>catalogus</h2>
+    <button type="button">log in!</button>
     <form th:action="@{/welcome}" th:object="${welcomeCommand}" method="post">
       Choose color:
       <select th:field="*{albumSelected}">
@@ -17,6 +19,5 @@
       </select>
       <button type="submit">OK</button>
     </form>
-    <button type="button">Click Me!</button>
   </body>
 </html>
