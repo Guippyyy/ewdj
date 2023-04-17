@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <h1>Welcome page</h1>
+    <form th:action="@{/welcome}" th:object="${welcomeCommand}" method="post">
+      Choose color:
+      <select th:field="*{albumSelected}">
+        <option
+          th:each="album : ${albumList}"
+          th:value="${album}"
+          th:text="${album}"
+        ></option>
+      </select>
+      <button type="submit">OK</button>
+    </form>
+    <button type="button">Click Me!</button>
+  </body>
+</html>
