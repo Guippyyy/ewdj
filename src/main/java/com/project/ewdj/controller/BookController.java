@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.ewdj.entity.Book;
 import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.service.BookService;
+import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
 
 @Controller
@@ -25,6 +26,9 @@ public class BookController {
 
     @Autowired
     private FavoriteService fService;
+
+    @Autowired
+    private DetailsService dService;
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -47,10 +51,24 @@ public class BookController {
         return "favoriteBookList";
     }
 
+    @GetMapping("/detais")
+    public String details(Model model) {
+        return "bookDetails";
+    }
+
     @PostMapping("/save")
     public String addBook(@ModelAttribute Book b) {
         service.save(b);
         return "redirect:/";
+
+    }
+
+    @RequestMapping("/details/{id}")
+    public String showDetails(@PathVariable("id") int id, Model model) {
+        Book b = service.getBookByISBN(id);
+        dService.save(b);
+        model.addAttribute("book", b);
+        return "bookDetails";
 
     }
 

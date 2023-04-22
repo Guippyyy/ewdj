@@ -18,9 +18,10 @@ public class MyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        repository.save(new Book(131, "inferno op zee", 534, 23.4, "dave"));
-        repository.save(new Book(1231, "Dune", 531234, 23.4, "frank Herbert"));
-        repository.save(new Book(1123, "Children of Dune", 5324, 23.4, "frank herbert"));
+        repository.save(new Book("inferno op zee", 534, 23.4, "Clive CLussler"));
+        repository.save(new Book("Dune", 531234, 23.4, "Frank Herbert"));
+        repository.save(new Book("Children of Dune", 5324, 23.4, "Frank Herbert"));
+        repository.save(new Book("Foundation", 5342344, 23.4, "Isaac Asimov"));
 
         // userRepository.save(new User("admin", "admin123", Role.ADMIN));
         // userRepository.save(new User("user", "user123", Role.USER));

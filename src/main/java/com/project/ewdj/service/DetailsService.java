@@ -1,28 +1,22 @@
 package com.project.ewdj.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.ewdj.entity.Book;
-import com.project.ewdj.repository.BookRepository;
+import com.project.ewdj.repository.DetailsRepository;
 
 @Service
-public class BookService {
+public class DetailsService {
 
     @Autowired
-    private BookRepository bRepo;
+    private DetailsRepository dRepo;
 
     public void save(Book b) {
-        bRepo.save(b);
-    }
-
-    public List<Book> getAllBooks() {
-        return (List<Book>) bRepo.findAll();
+        dRepo.save(b);
     }
 
     public Book getBookByISBN(int id) {
-        return bRepo.findById(id).get();
+        return dRepo.findById(id).get();
     }
 }

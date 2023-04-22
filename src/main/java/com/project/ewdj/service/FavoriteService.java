@@ -19,7 +19,7 @@ public class FavoriteService {
     }
 
     public List<Favorite> getAllFavorites() {
-        return fRepo.findAll();
+        return (List<Favorite>) fRepo.findAll();
     }
 
     public void deleteById(int id) {
