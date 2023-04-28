@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.ewdj.entity.Book;
-import com.project.ewdj.entity.Favorite;
+import com.project.ewdj.entity.FavoriteBook;
 import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
@@ -46,7 +46,7 @@ public class BookController {
 
     @GetMapping("/favorites")
     public String getAllFavoriteBooks(Model model) {
-        List<Favorite> list = fService.getAllFavorites();
+        List<FavoriteBook> list = fService.getAllFavorites();
         model.addAttribute("book", list);
         return "favoriteBookList";
     }
@@ -65,7 +65,7 @@ public class BookController {
 
     @RequestMapping("/details/{id}")
     public String showDetails(@PathVariable("id") int id, Model model) {
-        Book b = service.getBookByISBN(id);
+        Book b = service.getBookById(id);
         dService.save(b);
         model.addAttribute("book", b);
         return "bookDetails";
@@ -74,8 +74,8 @@ public class BookController {
 
     @RequestMapping("/favorite/{id}")
     public String getFavorites(@PathVariable("id") int id) {
-        Book b = service.getBookByISBN(id);
-        Favorite f = new Favorite(b.getId(), b.getBookName(), b.getAutor(), b.getPrice(), b.getIsbn_nummer());
+        Book b = service.getBookById(id);
+        FavoriteBook f = new FavoriteBook(b.getId(), b.getBookName(), null, b.getPrice(), b.getIsbn_nummer());
         fService.saveAsFavorite(f);
         return "redirect:/favorites";
     }

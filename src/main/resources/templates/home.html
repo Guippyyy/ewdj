@@ -68,7 +68,14 @@
       <tbody>
         <tr th:each="b :${book}">
           <td th:text="${b.bookName}"></td>
-          <td th:text="${b.autor}"></td>
+          <!-- <td th:text="${b.author}"></td> -->
+          <!-- <td>
+            <ul>
+              <li th:each="author : ${book.authors}" th:text="${author.name}">
+
+              </li>
+            </ul>
+          </td> -->
           <td align="center">
             <a class="btn sfa-sharp fa-solid fa-heart " th:href="@{/favorite/{id}(id=${b.id})}"></a>
             <a><i class="fa-solid fa-trash ms-5"></i></a>
