@@ -1,61 +1,44 @@
-package com.project.ewdj.entity;
+// package com.project.ewdj.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+// import java.io.Serializable;
 
-@Entity
-@Table(name = "books_authors")
-public class BookAuthor {
+// import jakarta.persistence.EmbeddedId;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.MapsId;
+// import jakarta.persistence.Table;
+// import lombok.AccessLevel;
+// import lombok.Getter;
+// import lombok.NoArgsConstructor;
+// import lombok.Setter;
 
-    @EmbeddedId
-    private BookAuthorId id;
+// @Getter
+// @Setter
+// @NoArgsConstructor
+// @Entity
+// @Table(name = "books_authors")
+// public class BookAuthor implements Serializable {
 
-    @ManyToOne
-    @MapsId("bookId")
-    @JoinColumn(name = "book_id")
-    private Book book;
+// private static final long serialVersionUID = 1L;
 
-    @ManyToOne
-    @MapsId("authorId")
-    @JoinColumn(name = "author_id")
-    private Author author;
+// @EmbeddedId
+// private BookAuthorId id;
 
-    public BookAuthor(Book book, Author author) {
-        setId(id);
-        this.book = book;
-        this.author = author;
-    }
+// @ManyToOne
+// @MapsId("bookId")
+// @JoinColumn(name = "book_id")
+// private Book book;
 
-    protected BookAuthor() {
-    }
+// @ManyToOne
+// @MapsId("authorId")
+// @JoinColumn(name = "author_id")
+// private Author author;
 
-    public Book getBook() {
-        return book;
-    }
+// public BookAuthor(Book book, Author author) {
+// this.book = book;
+// this.author = author;
+// this.id = new BookAuthorId(book.getId(), author.getId());
+// }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public BookAuthorId getId() {
-        return id;
-    }
-
-    public void setId(BookAuthorId id) {
-        this.id = id;
-    }
-}
+// }

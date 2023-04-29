@@ -16,7 +16,7 @@ public class DetailsService {
         dRepo.save(b);
     }
 
-    public Book getBookByISBN(int id) {
+    public Book getBookById(int id) {
         return dRepo.findById(id).get();
     }
 }
