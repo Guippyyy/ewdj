@@ -12,7 +12,6 @@ import com.project.ewdj.entity.Book;
 import com.project.ewdj.entity.Location;
 import com.project.ewdj.entity.Role;
 import com.project.ewdj.entity.User;
-import com.project.ewdj.repository.AuthorRepository;
 import com.project.ewdj.repository.BookRepository;
 import com.project.ewdj.repository.LocationRepository;
 import com.project.ewdj.repository.UserRepository;
@@ -23,9 +22,6 @@ public class MyRunner implements CommandLineRunner {
 
     @Autowired
     private BookRepository repository;
-
-    @Autowired
-    private AuthorRepository aRepository;
 
     @Autowired
     private UserRepository uRepository;

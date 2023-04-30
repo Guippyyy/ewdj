@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.ewdj.entity.Book;
-import com.project.ewdj.entity.FavoriteBook;
+import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
@@ -25,10 +25,10 @@ public class BookController {
     private BookService service;
 
     @Autowired
-    private FavoriteService fService;
+    private DetailsService dService;
 
     @Autowired
-    private DetailsService dService;
+    private FavoriteService fService;
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -39,28 +39,36 @@ public class BookController {
         return new ModelAndView("home", "book", list);
     }
 
-    @GetMapping("/add_book")
-    public String addBook() {
-        return "add_book";
-    }
-
-    @GetMapping("/favorites")
-    public String getAllFavoriteBooks(Model model) {
-        List<FavoriteBook> list = fService.getAllFavorites();
-        model.addAttribute("book", list);
-        return "favoriteBookList";
-    }
-
-    @GetMapping("/detais")
-    public String details(Model model) {
-        return "bookDetails";
-    }
-
     @PostMapping("/save")
     public String addBook(@ModelAttribute Book b) {
         service.save(b);
         return "redirect:/";
 
+    }
+
+    @GetMapping("/admin/add_book")
+    public String addBook() {
+        return "add_book";
+    }
+
+    @GetMapping("/user/favorites")
+    public String getAllFavoriteBooks(Model model) {
+        List<Favorite> list = fService.getAllFavorites();
+        model.addAttribute("book", list);
+        return "favoriteBookList";
+    }
+
+    @RequestMapping("/favorite/{id}")
+    public String getFavorites(@PathVariable("id") int id) {
+        Book b = service.getBookById(id);
+        Favorite f = new Favorite(b.getBookName());
+        fService.saveAsFavorite(f);
+        return "redirect:/favorites";
+    }
+
+    @GetMapping("/detais")
+    public String details(Model model) {
+        return "bookDetails";
     }
 
     @RequestMapping("/details/{id}")
@@ -72,11 +80,4 @@ public class BookController {
 
     }
 
-    @RequestMapping("/favorite/{id}")
-    public String getFavorites(@PathVariable("id") int id) {
-        Book b = service.getBookById(id);
-        FavoriteBook f = new FavoriteBook(b.getId(), b.getBookName(), null, b.getPrice(), b.getIsbn_nummer());
-        fService.saveAsFavorite(f);
-        return "redirect:/favorites";
-    }
 }

@@ -10,6 +10,18 @@
 
   <title>Book Club</title>
   <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  <script src="jquery/jquery.js"></script>
+  <script type="text/javascript" src='js/bootstrap.min.js'></script>
+  <link rel="stylesheet" href="css/bootstrap.css" />
 </head>
 <!-- <body background="/images/97o0lage1zi91.png"> -->
 
@@ -36,11 +48,19 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="favorites">favorite</a>
+            <a class="nav-link" href="user/favorites">favorite</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="add_book">add Book</a>
+            <a class="nav-link" href="admin/add_book">add Book</a>
           </li>
+          <div style="padding-left: 200px; padding-top: 10px;">
+            Role:
+            <span sec:authentication="principal.authorities"></span>
+          </div>
+          <div style="padding-left: 200px; padding-top: 10px;">
+            email:
+            <span sec:authentication="principal.username"></span>
+          </div>
         </ul>
         <form class="d-flex">
           <button class="btn btn-outline-success" type="submit">
@@ -52,8 +72,6 @@
     </div>
   </nav>
   <div align="center">
-
-    <!-- <img src="/images/97o0lage1zi91.png" width="1560px" /> -->
   </div>
 
   <div class="container my-5 col-md-5">
@@ -68,18 +86,14 @@
       <tbody>
         <tr th:each="b :${book}">
           <td th:text="${b.bookName}"></td>
-          <!-- <td th:text="${b.author}"></td> -->
-          <!-- <td>
-            <ul>
-              <li th:each="author : ${book.authors}" th:text="${author.name}">
+          <td th:each="author : ${b.authors}" th:text="${author.name}">
 
-              </li>
-            </ul>
-          </td> -->
+          </td>
+
           <td align="center">
             <a class="btn sfa-sharp fa-solid fa-heart " th:href="@{/favorite/{id}(id=${b.id})}"></a>
-            <a><i class="fa-solid fa-trash ms-5"></i></a>
-            <a><i class="fa-solid fa-pen-to-square ms-4"></i></a>
+            <!-- <a><i class="fa-solid fa-trash ms-5"></i></a>
+            <a><i class="fa-solid fa-pen-to-square ms-4"></i></a> -->
             <a class="btn fa-solid fa-angle-right ms-5" th:href="@{/details/{id}(id=${b.id})}"></a>
           </td>
         </tr>
@@ -87,15 +101,7 @@
     </table>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-    crossorigin="anonymous"></script>
+
 </body>
 
 </html>

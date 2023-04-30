@@ -60,12 +60,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:object="${book}">
-                <td th:text="${book.bookName}"></td>
-                <!-- <td th:text="${book.autor}"></td> -->
-                <td>sjdfklsd</td>
-                <td th:text="${book.price}"></td>
-                <td th:text="${book.isbn_nummer}"></td>
+            <tr th:each=" b : ${book}">
+                <td th:text="${b.bookName}"></td>
+                <td th:each="author : ${b.authors}" th:text="${author.name}"></td>
+                <td th:text="${b.price}"></td>
+                <td th:text="${b.isbn_nummer}"></td>
             </tr>
         </tbody>
     </table>
