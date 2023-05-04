@@ -32,6 +32,9 @@ public class User {
                     @JoinColumn(name = "role_id", referencedColumnName = "id") })
     private List<Role> roles = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private List<Favorite> favorites = new ArrayList<>();
+
     public User(String name, String email, String password, List<Role> roles) {
         this.name = name;
         this.email = email;

@@ -63,7 +63,7 @@
             <tr th:each=" b : ${book}">
                 <td th:text="${b.bookName}"></td>
                 <td th:each="author : ${b.authors}" th:text="${author.name}"></td>
-                <td th:text="${b.price}"></td>
+                <td th:text="${ '€' + b.price}">€ </td>
                 <td th:text="${b.isbn_nummer}"></td>
             </tr>
         </tbody>

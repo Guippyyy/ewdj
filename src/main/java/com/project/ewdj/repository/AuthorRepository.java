@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.project.ewdj.entity.Author;
 
 @Repository
-public interface AuthorRepository extends CrudRepository<Author, Integer> {
+public interface AuthorRepository extends CrudRepository<Author, Long> {
 
     List<Author> findByName(String name);
 }

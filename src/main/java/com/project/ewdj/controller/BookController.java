@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +18,7 @@ import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
+import com.project.ewdj.service.UserService;
 
 @Controller
 public class BookController {
@@ -29,6 +31,9 @@ public class BookController {
 
     @Autowired
     private FavoriteService fService;
+
+    @Autowired
+    private UserService uService;
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -51,33 +56,39 @@ public class BookController {
         return "add_book";
     }
 
-    @GetMapping("/user/favorites")
+    @GetMapping("/favorites")
     public String getAllFavoriteBooks(Model model) {
         List<Favorite> list = fService.getAllFavorites();
         model.addAttribute("book", list);
         return "favoriteBookList";
     }
 
-    @RequestMapping("/favorite/{id}")
-    public String getFavorites(@PathVariable("id") int id) {
+    @RequestMapping("/favorites/{id}")
+    public String getFavorites(@PathVariable("id") Long id) {
         Book b = service.getBookById(id);
-        Favorite f = new Favorite(b.getBookName());
+        Favorite f = new Favorite(b.getBookName(), uService.findAllUsers());
         fService.saveAsFavorite(f);
         return "redirect:/favorites";
     }
 
-    @GetMapping("/detais")
+    @GetMapping("/details")
     public String details(Model model) {
         return "bookDetails";
     }
 
     @RequestMapping("/details/{id}")
-    public String showDetails(@PathVariable("id") int id, Model model) {
+    public String showDetails(@PathVariable("id") Long id, Model model) {
         Book b = service.getBookById(id);
         dService.save(b);
         model.addAttribute("book", b);
         return "bookDetails";
 
     }
+
+    // @PutMapping("/{book_id}/author/{author_id}")
+    // public Book assignAuthorToBook(@PathVariable Long book_id, @PathVariable Long
+    // author_id) {
+    // return service.assignAuthorToBook(book_id, author_id);
+    // }
 
 }

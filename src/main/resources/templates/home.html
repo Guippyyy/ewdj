@@ -48,10 +48,13 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="user/favorites">favorite</a>
+            <a class="nav-link" href="/favorites">favorite</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="admin/add_book">add Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin/add_book">Most Populair Books</a>
           </li>
           <div style="padding-left: 200px; padding-top: 10px;">
             Role:
@@ -91,7 +94,7 @@
           </td>
 
           <td align="center">
-            <a class="btn sfa-sharp fa-solid fa-heart " th:href="@{/favorite/{id}(id=${b.id})}"></a>
+            <a class="btn sfa-sharp fa-solid fa-heart " th:href="@{/favorites/{id}(id=${b.id})}"></a>
             <!-- <a><i class="fa-solid fa-trash ms-5"></i></a>
             <a><i class="fa-solid fa-pen-to-square ms-4"></i></a> -->
             <a class="btn fa-solid fa-angle-right ms-5" th:href="@{/details/{id}(id=${b.id})}"></a>

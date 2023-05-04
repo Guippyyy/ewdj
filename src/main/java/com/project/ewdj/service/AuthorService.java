@@ -22,7 +22,7 @@ public class AuthorService {
         return (List<Author>) aRepo.findAll();
     }
 
-    public Author getAuthorById(int id) {
+    public Author getAuthorById(Long id) {
         return aRepo.findById(id).get();
     }
 }

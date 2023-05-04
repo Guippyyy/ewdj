@@ -2,7 +2,10 @@ package com.project.ewdj.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,12 +18,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "books")
 public class Book {
 
@@ -35,7 +37,7 @@ public class Book {
     private BigDecimal price;
     @Column(name = "rating", nullable = false)
     private float rating;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "books_authors", joinColumns = {
             @JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
                     @JoinColumn(name = "author_id", referencedColumnName = "id") })
@@ -44,10 +46,10 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Location> locations;
 
-    public Book(String bookName, String isbn_nummer, BigDecimal price, List<Author> authors) {
+    public Book(String bookName, String isbn_nummer, BigDecimal price) {
         this.bookName = bookName;
         this.isbn_nummer = isbn_nummer;
         this.price = price;
-        this.authors = authors;
+        // this.authors = authors;
     }
 }
