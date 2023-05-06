@@ -9,6 +9,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,6 +22,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String name;
     @Column(nullable = false, unique = true)
@@ -31,9 +34,6 @@ public class User {
             @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
                     @JoinColumn(name = "role_id", referencedColumnName = "id") })
     private List<Role> roles = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    private List<Favorite> favorites = new ArrayList<>();
 
     public User(String name, String email, String password, List<Role> roles) {
         this.name = name;

@@ -1,6 +1,8 @@
 package com.project.ewdj.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.ewdj.entity.Book;
 import com.project.ewdj.entity.Favorite;
@@ -19,6 +22,7 @@ import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
 import com.project.ewdj.service.UserService;
+import com.project.ewdj.util.HomeListItem;
 
 @Controller
 public class BookController {
@@ -38,10 +42,14 @@ public class BookController {
     @GetMapping("/")
     public ModelAndView home() {
         List<Book> list = service.getAllBooks();
-        // ModelAndView m = new ModelAndView();
-        // m.setViewName("home");
-        // m.addObject("book", list);
-        return new ModelAndView("home", "book", list);
+        Set<Book> favorites = fService.getUserFavorites();
+
+        List<HomeListItem> items = new ArrayList<>();
+        for (var book : list) {
+            items.add(new HomeListItem(book, favorites.contains(book)));
+        }
+
+        return new ModelAndView("home", "items", items);
     }
 
     @PostMapping("/save")
@@ -56,19 +64,23 @@ public class BookController {
         return "add_book";
     }
 
+    // this should change
     @GetMapping("/favorites")
-    public String getAllFavoriteBooks(Model model) {
-        List<Favorite> list = fService.getAllFavorites();
+    public String getAllFavoriteBooks(Model model, Model m2) {
+
+        Set<Book> list = fService.getUserFavorites();
         model.addAttribute("book", list);
+        // m2.addAttribute(null, list)
         return "favoriteBookList";
     }
 
     @RequestMapping("/favorites/{id}")
-    public String getFavorites(@PathVariable("id") Long id) {
+    public String getFavorites(@PathVariable("id") Long id, Model m2, RedirectAttributes redirAttrs) {
         Book b = service.getBookById(id);
-        Favorite f = new Favorite(b.getBookName(), uService.findAllUsers());
-        fService.saveAsFavorite(f);
-        return "redirect:/favorites";
+        fService.saveAsFavorite(b);
+        redirAttrs.addFlashAttribute("message", "Book " + b.getBookName() + " added!");
+
+        return "redirect:/favorites?success";
     }
 
     @GetMapping("/details")
@@ -84,11 +96,5 @@ public class BookController {
         return "bookDetails";
 
     }
-
-    // @PutMapping("/{book_id}/author/{author_id}")
-    // public Book assignAuthorToBook(@PathVariable Long book_id, @PathVariable Long
-    // author_id) {
-    // return service.assignAuthorToBook(book_id, author_id);
-    // }
 
 }

@@ -32,13 +32,4 @@ public class BookService {
         return bRepo.findById(id).get();
     }
 
-    public Book assignAuthorToBook(Long book_id, Long author_id) {
-        List<Author> authors = null;
-        Book book = bRepo.findById(book_id).get();
-        Author author = aRepo.findById(author_id).get();
-        authors = book.getAuthors();
-        authors.add(author);
-        book.setAuthors(authors);
-        return bRepo.save(book);
-    }
 }

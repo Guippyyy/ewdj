@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.ewdj.dto.UserDto;
+import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.entity.Role;
 import com.project.ewdj.entity.User;
 import com.project.ewdj.repository.RoleRepository;
@@ -47,4 +48,5 @@ public class UserServiceImpl implements UserService {
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
+
 }

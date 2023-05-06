@@ -29,8 +29,9 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name", nullable = false)
-    private String bookName;
+    public String bookName;
     @Column(name = "isbn", nullable = false)
     private String isbn_nummer;
     @Column(name = "price", nullable = false)

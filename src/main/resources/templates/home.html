@@ -77,6 +77,12 @@
   <div align="center">
   </div>
 
+  <div th:if="${param.success}">
+    <div class="alert alert-info">
+      <h5 th:text="${message}"></h5>
+    </div>
+  </div>
+
   <div class="container my-5 col-md-5">
     <table class="table table-striped table-hover" style="background-color: wheat; border-radius: 5px;">
       <thead>
@@ -87,17 +93,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="b :${book}">
-          <td th:text="${b.bookName}"></td>
-          <td th:each="author : ${b.authors}" th:text="${author.name}">
-
+        <tr th:each="item :${items}">
+          <td th:text="${item.book.bookName}"></td>
+          <td>
+            <table>
+              <tr th:each="author : ${item.book.authors}">
+                <td th:text="${author.name}"></td>
+              </tr>
+            </table>
           </td>
 
           <td align="center">
-            <a class="btn sfa-sharp fa-solid fa-heart " th:href="@{/favorites/{id}(id=${b.id})}"></a>
+            <a th:if="${! item.isFavorite}" class="btn sfa-sharp fa-solid fa-heart "
+              th:href="@{/favorites/{id}(id=${item.book.id})}"></a>
             <!-- <a><i class="fa-solid fa-trash ms-5"></i></a>
             <a><i class="fa-solid fa-pen-to-square ms-4"></i></a> -->
-            <a class="btn fa-solid fa-angle-right ms-5" th:href="@{/details/{id}(id=${b.id})}"></a>
+            <a class="btn fa-solid fa-angle-right ms-5" th:href="@{/details/{id}(id=${item.book.id})}"></a>
           </td>
         </tr>
       </tbody>

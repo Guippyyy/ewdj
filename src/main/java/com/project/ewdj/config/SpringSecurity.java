@@ -29,7 +29,7 @@ public class SpringSecurity {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/user/")
+                        .defaultSuccessUrl("/")
                         .permitAll())
                 .logout((logout) -> logout.permitAll())
                 .exceptionHandling().accessDeniedPage("/access-denied");

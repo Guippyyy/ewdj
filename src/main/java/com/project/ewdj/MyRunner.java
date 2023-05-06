@@ -96,19 +96,15 @@ public class MyRunner implements CommandLineRunner {
                 User user2 = new User("guillaume", "guillaume.decraene@student.hogent.be",
                                 passwordEncoder.encode("abc"),
                                 Arrays.asList(roleB));
-                // User user3 = new User("guillaume", "guillaume.decraene@student.hogent.com",
-                // passwordEncoder.encode("abc"),
-                // Arrays.asList(roleB));
 
                 uRepository.save(user1);
                 uRepository.save(user2);
-                // uRepository.save(user3);
 
-                // Favorite favorite1 = new Favorite("Consider Phlebas", Arrays.asList(user1));
-                // Favorite favorite2 = new Favorite("Consider Phlebas", Arrays.asList(user2));
-
+                // Favorite favorite1 = new Favorite(user2, book1);
+                // Favorite favorite2 = new Favorite(user2, book2);
                 // fRepository.save(favorite1);
                 // fRepository.save(favorite2);
+
         }
 
 }
