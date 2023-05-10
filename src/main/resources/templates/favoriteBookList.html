@@ -29,7 +29,10 @@
             <a class="nav-link active" href="/favorites">Favorite</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/admin/add_book">Add Book</a>
+            <a class="nav-link" href="/admin/add_book" sec:authorize="hasRole('ADMIN')">Add Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mostPop">Most Populair Books</a>
           </li>
           <div style="padding-left: 200px; padding-top: 10px;">
             Role:
@@ -37,7 +40,7 @@
           </div>
           <div style="padding-left: 200px; padding-top: 10px;">
             email:
-            <span sec:authentication="principal.username"></span>
+            <span sec:authentication="name"></span>
           </div>
         </ul>
         <form class="d-flex">

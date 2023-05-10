@@ -25,16 +25,26 @@
             <a class="nav-link" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/favorites">Favorite</a>
+            <a class="nav-link" href="/favorites">Favorite</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/admin/add_book">Add Book</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mostPop">Most Populair Books</a>
+          </li>
+          <div style="padding-left: 200px; padding-top: 10px;">
+            Role:
+            <span sec:authentication="principal.authorities"></span>
+          </div>
+          <div style="padding-left: 200px; padding-top: 10px;">
+            email:
+            <span sec:authentication="principal.username"></span>
+          </div>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success" type="submit">
-            Search
+            <a href="/logout">logout</a>
           </button>
         </form>
       </div>
@@ -45,21 +55,42 @@
   <div classname="container my-5 p-5">
     <form class="col-md-4 offset-md-4" th:action="@{/save}" method="post">
       <div class="mb-3">
-        <label for="name" class="form-label">name </label>
+        <label for="name" class="form-label">Name </label>
         <input type="text" class="form-control" name="bookName" />
       </div>
       <div class="mb-3">
-        <label for="author" class="form-label">author </label>
+        <label for="author" class="form-label">Author </label>
         <input type="text" class="form-control" name="author" />
       </div>
       <div class="mb-3">
-        <label for="price" class="form-label">price </label>
+        <label for="author" class="form-label">Author2 </label>
+        <input type="text" class="form-control" name="author" />
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author3 </label>
+        <input type="text" class="form-control" name="author" />
+      </div>
+      <div class="mb-3">
+        <label for="isbn_nummer" class="form-label">ISBN Nummer </label>
+        <input type="text" class="form-control" name="isbn_nummer" />
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price </label>
         <input type="text" class="form-control" name="price" />
       </div>
       <div class="mb-3">
-        <label for="isbn_nummer" class="form-label">isbn_nummer </label>
-        <input type="text" class="form-control" name="isbn_nummer" />
+        <label for="price" class="form-label">Location </label>
+        <input type="text" class="form-control" name="location" />
       </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Location2</label>
+        <input type="text" class="form-control" name="location" />
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Location3 </label>
+        <input type="text" class="form-control" name="location" />
+      </div>
+
 
       <center>
         <button type="submit" class="btn btn-primary">Submit</button>

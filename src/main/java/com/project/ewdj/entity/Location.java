@@ -34,10 +34,11 @@ public class Location {
     @Column(name = "place_name", nullable = false)
     private String placeName;
 
-    public Location(String placeCode1, String placeCode2, String placeName) {
+    public Location(String placeCode1, String placeCode2, String placeName, Book book) {
         this.placeCode1 = placeCode1;
         this.placeCode2 = placeCode2;
         this.placeName = placeName;
+        this.book = book;
     }
 
     protected Location() {

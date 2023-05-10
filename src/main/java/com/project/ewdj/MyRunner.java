@@ -48,11 +48,13 @@ public class MyRunner implements CommandLineRunner {
                 Author author2 = new Author("Venor Vinge");
                 Author author3 = new Author("Frank Herbert");
                 Author author4 = new Author("Isaac Asimov");
+                Author author5 = new Author("fklasjfkl");
 
                 aRepository.save(author1);
                 aRepository.save(author2);
                 aRepository.save(author3);
                 aRepository.save(author4);
+                aRepository.save(author5);
 
                 Book book1 = new Book("Consider Phlebas", "2312865737457", new BigDecimal("32.0"));
                 Book book2 = new Book("Fire Upon The Deep", "2312365477328", new BigDecimal("32.0"));
@@ -65,6 +67,8 @@ public class MyRunner implements CommandLineRunner {
 
                 book5.getAuthors().add(author1);
                 book1.getAuthors().add(author3);
+                // book1.getAuthors().add(author4);
+                // book1.getAuthors().add(author5);
                 book2.getAuthors().add(author2);
                 book3.getAuthors().add(author3);
                 book5.getAuthors().add(author4);
@@ -81,12 +85,17 @@ public class MyRunner implements CommandLineRunner {
                 repository.save(book4);
                 repository.save(book5);
 
-                // repository.assignAuthorToBook(book1.getId(), author1.getId());
+                Location location1 = new Location("12312", "1231", "Ronse", book1);
+                Location location2 = new Location("12312", "1231", "Gent", book2);
+                Location location3 = new Location("12312", "1231", "Oudenaarde", book3);
+                Location location4 = new Location("12312", "1231", "Brussel", book4);
+                Location location5 = new Location("234234234", "3423", "Arrakis", book1);
 
-                lRepository.save(new Location("12312", "1231", "Ronse"));
-                lRepository.save(new Location("12312", "1231", "Gent"));
-                lRepository.save(new Location("12312", "1231", "Oudenaarde"));
-                lRepository.save(new Location("12312", "1231", "Brussel"));
+                lRepository.save(location1);
+                lRepository.save(location2);
+                lRepository.save(location3);
+                lRepository.save(location4);
+                lRepository.save(location5);
 
                 Role roleA = new Role(TbConstants.Roles.ADMIN);
                 Role roleB = new Role(TbConstants.Roles.USER);
@@ -100,10 +109,20 @@ public class MyRunner implements CommandLineRunner {
                 uRepository.save(user1);
                 uRepository.save(user2);
 
-                // Favorite favorite1 = new Favorite(user2, book1);
-                // Favorite favorite2 = new Favorite(user2, book2);
-                // fRepository.save(favorite1);
-                // fRepository.save(favorite2);
+                Favorite favorite1 = new Favorite(user2, book4);
+                Favorite favorite2 = new Favorite(user2, book2);
+
+                Favorite favorite3 = new Favorite(user1, book5);
+                Favorite favorite4 = new Favorite(user2, book3);
+                Favorite favorite5 = new Favorite(user1, book2);
+                Favorite favorite6 = new Favorite(user2, book5);
+
+                fRepository.save(favorite1);
+                fRepository.save(favorite2);
+                fRepository.save(favorite3);
+                fRepository.save(favorite4);
+                fRepository.save(favorite5);
+                fRepository.save(favorite6);
 
         }
 

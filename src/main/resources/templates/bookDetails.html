@@ -31,13 +31,23 @@
                     <a class="nav-link " href="/favorites">Favorite</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/add_book">Add Book</a>
+                    <a class="nav-link " href="/admin/add_book" sec:authorize="hasRole('ADMIN')">Add Book</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mostPop">Most Populair Books</a>
+                </li>
+                <div style="padding-left: 200px; padding-top: 10px;">
+                    Role:
+                    <span sec:authentication="principal.authorities"></span>
+                </div>
+                <div style="padding-left: 200px; padding-top: 10px;">
+                    email:
+                    <span sec:authentication="principal.username"></span>
+                </div>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                 <button class="btn btn-outline-success" type="submit">
-                    Search
+                    <a href="/logout">logout</a>
                 </button>
             </form>
         </div>
@@ -54,8 +64,11 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Author</th>
-                <th scope="col">Price</th>
                 <th scope="col">ISBN</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stars</th>
+                <th scope="col">Location</th>
+
 
             </tr>
         </thead>
@@ -69,8 +82,23 @@
                         </tr>
                     </table>
                 </td>
-                <td th:text="${ '€' + b.price}"> </td>
                 <td th:text="${b.isbn_nummer}"></td>
+                <td th:text="${ '€' + b.price}"> </td>
+                <td th:text="${star}"></td>
+                <td>
+                    <table>
+                        <tr th:each="l : ${loc}">
+
+                            <td th:text="${ '- ' + l.placeCode1 }"></td>
+                            <td>|</td>
+                            <td th:text="${l.placeCode2}"></td>
+                            <td> | </td>
+                            <td th:text="${l.placeName}"></td>
+
+                        </tr>
+                    </table>
+                </td>
+
             </tr>
         </tbody>
     </table>

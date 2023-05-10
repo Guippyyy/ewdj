@@ -51,10 +51,10 @@
             <a class="nav-link" href="/favorites">favorite</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin/add_book">add Book</a>
+            <a class="nav-link" href="admin/add_book" sec:authorize="hasRole('ADMIN')">add Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin/add_book">Most Populair Books</a>
+            <a class="nav-link" href="/mostPop">Most Populair Books</a>
           </li>
           <div style="padding-left: 200px; padding-top: 10px;">
             Role:
@@ -66,10 +66,8 @@
           </div>
         </ul>
         <form class="d-flex">
-          <button class="btn btn-outline-success" type="submit">
+          <a class="btn btn-primary" href="/logout" role="button">logout</a>
 
-            <a href="/logout">logout</a>
-          </button>
         </form>
       </div>
     </div>

@@ -1,7 +1,9 @@
 package com.project.ewdj.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.ewdj.entity.Book;
 import com.project.ewdj.entity.Favorite;
+import com.project.ewdj.entity.Location;
 import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
+import com.project.ewdj.service.LocationService;
 import com.project.ewdj.service.UserService;
+import com.project.ewdj.util.FavoriteUtils;
 import com.project.ewdj.util.HomeListItem;
 
 @Controller
@@ -38,6 +43,9 @@ public class BookController {
 
     @Autowired
     private UserService uService;
+
+    @Autowired
+    private LocationService lService;
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -92,9 +100,74 @@ public class BookController {
     public String showDetails(@PathVariable("id") Long id, Model model) {
         Book b = service.getBookById(id);
         dService.save(b);
+
+        List<Favorite> Flist = fService.getFavorites();
+        List<Location> Llist = lService.getLocations();
+        List<Object[]> result = FavoriteUtils.countDuplicates(Flist);
+
+        var star = 0;
+
+        for (Object[] obj : result) {
+
+            Long bookId = (Long) obj[0];
+            String bookName = (String) obj[1];
+            Integer count = (Integer) obj[2];
+            if (bookId == id) {
+                star = count;
+            }
+            System.out.println("Book ID: " + bookId + " | Book Name: " + bookName + " | Count: " + count);
+        }
+
+        List<Location> loc = new ArrayList<>();
+        for (Location l : Llist) {
+
+            if (l.getBook().getId() == id) {
+                loc.add(l);
+            }
+
+        }
+
+        model.addAttribute("loc", loc);
         model.addAttribute("book", b);
+        model.addAttribute("star", star);
         return "bookDetails";
 
     }
 
+    @GetMapping("/mostPop")
+    public String mostPop(Model model) {
+
+        List<Favorite> Flist = fService.getFavorites();
+        List<Object[]> result = FavoriteUtils.countDuplicates(Flist);
+
+        for (Object[] obj : result) {
+            Long bookId = (Long) obj[0];
+            String bookName = (String) obj[1];
+            Integer count = (Integer) obj[2];
+
+            System.out.println("Book ID: " + bookId + " | Book Name: " + bookName + " | Count: " + count);
+        }
+        model.addAttribute("items", result);
+
+        return "mostPop";
+    }
+
+    public <T> Map<T, Long> countByForEachLoopWithGetOrDefault(List<T> inputList) {
+        Map<T, Long> resultMap = new HashMap<>();
+        inputList.forEach(e -> resultMap.put(e, resultMap.getOrDefault(e, 0L) + 1L));
+        System.out.println(resultMap);
+        return resultMap;
+    }
+
+    public <T> Map<T, Long> countByClassicalLoop(List<T> inputList) {
+        Map<T, Long> resultMap = new HashMap<>();
+        for (T element : inputList) {
+            if (resultMap.containsKey(element)) {
+                resultMap.put(element, resultMap.get(element) + 1L);
+            } else {
+                resultMap.put(element, 1L);
+            }
+        }
+        return resultMap;
+    }
 }

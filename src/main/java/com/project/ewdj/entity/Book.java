@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.project.ewdj.util.MaxSizeArrayList;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,10 +44,10 @@ public class Book {
     @JoinTable(name = "books_authors", joinColumns = {
             @JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
                     @JoinColumn(name = "author_id", referencedColumnName = "id") })
-    private List<Author> authors = new ArrayList<>();
+    private List<Author> authors = new MaxSizeArrayList<>(3);
 
     @OneToMany(mappedBy = "book")
-    private List<Location> locations;
+    private List<Location> locations = new MaxSizeArrayList<>(3);
 
     public Book(String bookName, String isbn_nummer, BigDecimal price) {
         this.bookName = bookName;

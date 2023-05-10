@@ -28,8 +28,9 @@ public class FavoriteService {
     @Autowired
     private UserRepository uRepo;
 
-    @Autowired
-    private BookRepository bRepo;
+    public List<Favorite> getFavorites() {
+        return (List<Favorite>) fRepo.findAll();
+    }
 
     public void saveAsFavorite(Book book) {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -67,9 +68,4 @@ public class FavoriteService {
     public void deleteById(Long id) {
         fRepo.deleteById(id);
     }
-
-    // public void deleteByBookId(Long id) {
-    // Optional<Book> b = bRepo.findById(id);
-    // fRepo.deleteByBookId(b.get().getId());
-    // }
 }
