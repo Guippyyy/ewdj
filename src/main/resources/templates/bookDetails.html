@@ -11,10 +11,16 @@
     <title>Book Club</title>
     <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
 </head>
-<!-- <body background="/images/97o0lage1zi91.png"> -->
 
 <body background="/images/download (4).jpg"></body>
-
+<style>
+    body {
+        background-image: src="/images/97o0lage1zi91.png";
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Book Club</a>
@@ -25,18 +31,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/" th:text="#{navbar.Home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/favorites">Favorite</a>
+                    <a class="nav-link " href="/favorites" th:text="#{navbar.Favorite}">Favorite</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/admin/add_book" sec:authorize="hasRole('ADMIN')">Add Book</a>
+                    <a class="nav-link " href="/admin/add_book" sec:authorize="hasRole('ADMIN')"
+                        th:text="#{navbar.AddBook}">Add Book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mostPop">Most Populair Books</a>
+                    <a class="nav-link" href="/mostPop" th:text="#{navbar.MostPop}">Most Populair Books</a>
                 </li>
-                <div style="padding-left: 200px; padding-top: 10px;">
+                <div style="padding-left: 200px; padding-top: 10px;" th:text="#{navbar.Role}">
                     Role:
                     <span sec:authentication="principal.authorities"></span>
                 </div>
@@ -47,27 +54,25 @@
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-success" type="submit">
-                    <a href="/logout">logout</a>
+                    <a href="/logout" th:text="#{navbar.Logout}">logout</a>
                 </button>
             </form>
         </div>
     </div>
 </nav>
 <div align="center">
-
-    <!-- <img src="/images/97o0lage1zi91.png" width="1560px" /> -->
 </div>
 
-<div class="container my-5 col-md-5">
+<div class="container my-5 col-md-8">
     <table class="table table-striped table-hover" style="background-color: wheat; border-radius: 5px">
         <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Author</th>
+                <th scope="col" th:text="#{table.Name}">Name</th>
+                <th scope="col" th:text="#{table.Author}">Author</th>
                 <th scope="col">ISBN</th>
-                <th scope="col">Price</th>
-                <th scope="col">Stars</th>
-                <th scope="col">Location</th>
+                <th scope="col" th:text="#{table.Price}">Price</th>
+                <th scope="col" th:text="#{table.Stars}">Stars</th>
+                <th scope="col" th:text="#{table.Location}">Location</th>
 
 
             </tr>
@@ -78,7 +83,7 @@
                 <td>
                     <table>
                         <tr th:each="author : ${b.authors}">
-                            <td th:text="${author.name}"></td>
+                            <td th:text="${'-' + author.name}"></td>
                         </tr>
                     </table>
                 </td>

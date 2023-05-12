@@ -13,6 +13,14 @@
 </head>
 
 <body background="/images/download (4).jpg">
+  <style>
+    body {
+      background-image: src="/images/97o0lage1zi91.png";
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Book Club</a>
@@ -23,20 +31,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="/">Home</a>
+            <a class="nav-link " aria-current="page" href="/" th:text="#{navbar.Home}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/favorites">Favorite</a>
+            <a class="nav-link active" href="/favorites" th:text="#{navbar.Favorite}">Favorite</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/admin/add_book" sec:authorize="hasRole('ADMIN')">Add Book</a>
+            <a class="nav-link" href="/admin/add_book" sec:authorize="hasRole('ADMIN')" th:text="#{navbar.AddBook}">Add
+              Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/mostPop">Most Populair Books</a>
+            <a class="nav-link" href="/mostPop" th:text="#{navbar.MostPop}">Most Populair Books</a>
           </li>
           <div style="padding-left: 200px; padding-top: 10px;">
-            Role:
-            <span sec:authentication="principal.authorities"></span>
+            <span sec:authentication="principal.authorities">
+            </span>
           </div>
           <div style="padding-left: 200px; padding-top: 10px;">
             email:
@@ -45,7 +54,7 @@
         </ul>
         <form class="d-flex">
           <button class="btn btn-outline-success" type="submit">
-            <a href="/logout">logout</a>
+            <a href="/logout" th:text="#{navbar.Logout}">logout</a>
           </button>
         </form>
       </div>
@@ -64,19 +73,13 @@
     <table class="table table-striped table-hover" style="background-color: wheat; border-radius: 5px">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <!-- <th scope="col">Author</th>
-          <th scope="col">Price</th>
-          <th scope="col">ISBN</th> -->
-          <th scope="col">Action</th>
+          <th scope="col" th:text="#{table.Name}">Name</th>
+          <th scope="col" th:text="#{table.Action}">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="b :${book}">
           <td th:text="${b.bookName}"></td>
-          <!-- <td th:each="author : ${b.authors}" th:text="${author.name}"></td>
-          <td th:text="${b.price}"></td>
-          <td th:text="${b.isbn_nummer}"></td> -->
           <td>
             <a class="fa-solid fa-trash" th:href="@{/deleteMyList/{id}(id=${b.id})}"></a>
           </td>

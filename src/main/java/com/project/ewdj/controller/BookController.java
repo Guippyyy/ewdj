@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.ewdj.entity.Author;
 import com.project.ewdj.entity.Book;
 import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.entity.Location;
+import com.project.ewdj.service.AuthorService;
 import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
@@ -45,6 +47,9 @@ public class BookController {
     private UserService uService;
 
     @Autowired
+    AuthorService aService;
+
+    @Autowired
     private LocationService lService;
 
     @GetMapping("/")
@@ -61,8 +66,23 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String addBook(@ModelAttribute Book b) {
-        service.save(b);
+    public String addBook(@ModelAttribute Book b, @ModelAttribute Author a, @ModelAttribute Location l,
+            @ModelAttribute Author av) {
+        Author a1 = a;
+        Author a2 = av;
+        aService.save(a1);
+        aService.save(a2);
+
+        Book b1 = b;
+
+        b1.getAuthors().add(a1);
+        b1.getAuthors().add(a2);
+        service.save(b1);
+
+        Location l1 = l;
+        l.setBook(b1);
+        lService.save(l1);
+
         return "redirect:/";
 
     }

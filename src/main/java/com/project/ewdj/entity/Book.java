@@ -53,6 +53,5 @@ public class Book {
         this.bookName = bookName;
         this.isbn_nummer = isbn_nummer;
         this.price = price;
-        // this.authors = authors;
     }
 }

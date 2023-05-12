@@ -17,7 +17,7 @@
                 <form method="post" role="form" th:action="@{/registration}" th:object="${user}">
                     <h1>Registration Form</h1>
                     <div th:if="${param.success}">
-                        <div class="alert alert-info">
+                        <div class="alert alert-info" th:text="#{alert.Registration}">
                             Registration successful !!!
                         </div>
                     </div>
