@@ -10,5 +10,5 @@ import com.project.ewdj.entity.Author;
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
 
-    List<Author> findByName(String name);
+    Author findByname(String name);
 }

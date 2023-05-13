@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -33,8 +34,8 @@ public class Author {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonBackReference
     private List<Book> books = new ArrayList<>();
 
     public Author(String name) {

@@ -25,4 +25,8 @@ public class AuthorService {
     public Author getAuthorById(Long id) {
         return aRepo.findById(id).get();
     }
+
+    public Author getAuthorByName(String name) {
+        return aRepo.findByname(name);
+    }
 }

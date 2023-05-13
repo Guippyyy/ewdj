@@ -33,7 +33,6 @@ public class FavoriteController {
     public String deleteMyList(@PathVariable("id") Long id, RedirectAttributes redirAtt) {
         Book b = service.getBookById(id);
         fRepo.deleteByBookId(b.getId());
-        // Book b = service.getBookById(id);
         redirAtt.addFlashAttribute("message", "Book " + b.getBookName() + " removed ");
         return "redirect:/?success";
     }
