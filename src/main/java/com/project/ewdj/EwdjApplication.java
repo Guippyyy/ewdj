@@ -18,13 +18,6 @@ public class EwdjApplication implements WebMvcConfigurer {
 		SpringApplication.run(EwdjApplication.class, args);
 	}
 
-	// @Bean
-	// LocaleResolver localResolver() {
-	// SessionLocaleResolver slr = new SessionLocaleResolver();
-	// slr.setDefaultLocale(Locale.forLanguageTag("NL"));
-	// return slr;
-	// }
-
 	@Bean
 	LocaleResolver localResolver() {
 		SessionLocaleResolver slr = new SessionLocaleResolver();

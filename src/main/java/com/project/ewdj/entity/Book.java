@@ -55,9 +55,9 @@ public class Book implements Serializable {
     @JsonManagedReference
     private List<Location> locations = new MaxSizeArrayList<>(3);
 
-    public Book(String bookName, String isbn_nummer, BigDecimal price) {
+    public Book(String bookName, String isbnCode, BigDecimal price) {
         this.bookName = bookName;
-        this.isbnCode = isbn_nummer;
+        this.isbnCode = isbnCode;
         this.price = price;
     }
 }

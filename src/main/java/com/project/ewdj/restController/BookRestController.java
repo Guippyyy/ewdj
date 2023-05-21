@@ -11,7 +11,6 @@ import com.project.ewdj.entity.Author;
 import com.project.ewdj.entity.Book;
 import com.project.ewdj.service.AuthorService;
 import com.project.ewdj.service.BookService;
-import com.project.ewdj.util.HomeListItem;
 
 @RestController
 @RequestMapping(value = "/rest")
@@ -22,11 +21,6 @@ public class BookRestController {
 
     @Autowired
     public AuthorService aService;
-
-    @GetMapping(value = "/emp/dummy")
-    public Book getDummyBook() {
-        return service.getDummyBook();
-    }
 
     @GetMapping(value = "/emp/{id}")
     public Book getBook(@PathVariable("id") Long id) {

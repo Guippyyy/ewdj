@@ -28,13 +28,13 @@ public class Location {
     @JsonBackReference
     private Book book;
 
-    @Column(name = "place_code_1", nullable = false)
+    @Column(name = "place_code_1", nullable = true)
     private String placeCode1;
 
-    @Column(name = "place_code_2", nullable = false)
+    @Column(name = "place_code_2", nullable = true)
     private String placeCode2;
 
-    @Column(name = "place_name", nullable = false)
+    @Column(name = "place_name", nullable = true)
     private String placeName;
 
     public Location(String placeCode1, String placeCode2, String placeName, Book book) {

@@ -44,9 +44,6 @@ public class BookController {
     private FavoriteService fService;
 
     @Autowired
-    private UserService uService;
-
-    @Autowired
     AuthorService aService;
 
     @Autowired
@@ -66,25 +63,24 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String addBook(@ModelAttribute Book b, @ModelAttribute Author a, @ModelAttribute Location l,
-            @ModelAttribute Author av) {
-        Author a1 = a;
-        Author a2 = av;
-        aService.save(a1);
-        aService.save(a2);
+    public String addBook(@ModelAttribute Book book, Model model) {
+        for (Author author : book.getAuthors()) {
+            // if author already exists do something
+            aService.save(author);
+        }
 
-        Book b1 = b;
+        service.save(book);
 
-        b1.getAuthors().add(a1);
-        b1.getAuthors().add(a2);
-        service.save(b1);
+        // Save the location
+        String placeName = (String) model.getAttribute("placeName");
+        String placeCode1 = (String) model.getAttribute("placeCode1");
+        String placeCode2 = (String) model.getAttribute("placeCode2");
+        Location location = new Location(placeCode1, placeCode2, placeName, book);
+        lService.save(location);
 
-        Location l1 = l;
-        l.setBook(b1);
-        lService.save(l1);
+        System.out.println(book.getLocations());
 
         return "redirect:/";
-
     }
 
     @GetMapping("/admin/add_book")

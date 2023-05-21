@@ -7,12 +7,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.project.ewdj.entity.Author;
 import com.project.ewdj.entity.Book;
-import com.project.ewdj.repository.AuthorRepository;
 import com.project.ewdj.repository.BookRepository;
-import com.project.ewdj.repository.FavoriteRepository;
 import com.project.ewdj.util.HomeListItem;
 
 @Service
@@ -20,9 +16,6 @@ public class BookService {
 
     @Autowired
     private BookRepository bRepo;
-
-    @Autowired
-    private AuthorRepository aRepo;
 
     @Autowired
     private FavoriteService fRepo;
@@ -52,11 +45,6 @@ public class BookService {
             items.add(new HomeListItem(book, favorites.contains(book)));
         }
         return items;
-    }
-
-    public Book getDummyBook() {
-        Book book = new Book("USE OF WEAPONS", "978-3-16-148410-0", new BigDecimal("32.0"));
-        return book;
     }
 
 }
