@@ -31,7 +31,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = true)
     private String name;
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

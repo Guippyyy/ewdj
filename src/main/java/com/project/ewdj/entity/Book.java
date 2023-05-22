@@ -39,7 +39,7 @@ public class Book implements Serializable {
     public String bookName;
     @Column(name = "isbn", nullable = false)
     private String isbnCode;
-    @Column(name = "price", nullable = false)
+    @Column(name = "price", nullable = true)
     private BigDecimal price;
     @Column(name = "rating", nullable = false)
     private float rating;
