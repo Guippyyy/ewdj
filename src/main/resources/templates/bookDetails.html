@@ -43,8 +43,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mostPop" th:text="#{navbar.MostPop}">Most Populair Books</a>
                 </li>
-                <div style="padding-left: 200px; padding-top: 10px;" th:text="#{navbar.Role}">
-                    Role:
+                <div style="padding-left: 200px; padding-top: 10px;">
+
                     <span sec:authentication="principal.authorities"></span>
                 </div>
                 <div style="padding-left: 200px; padding-top: 10px;">
@@ -83,7 +83,7 @@
                 <td>
                     <table>
                         <tr th:each="author : ${b.authors}">
-                            <td th:text="${'-' + author.name}"></td>
+                            <td th:text="${author.name}"></td>
                         </tr>
                     </table>
                 </td>

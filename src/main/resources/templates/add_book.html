@@ -11,6 +11,7 @@
   <title>Book Club</title>
 </head>
 
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -33,8 +34,8 @@
           <li class="nav-item">
             <a class="nav-link" href="/mostPop" th:text="#{navbar.MostPop}">Most Populair Books</a>
           </li>
-          <div style="padding-left: 200px; padding-top: 10px;" th:text="#{navbar.Role}">
-            Role:
+          <div style="padding-left: 200px; padding-top: 10px;">
+
             <span sec:authentication="principal.authorities"></span>
           </div>
           <div style="padding-left: 200px; padding-top: 10px;">
@@ -50,7 +51,14 @@
       </div>
     </div>
   </nav>
-  <h1>add book</h1>
+
+
+  <div th:if="${param.success}">
+    <div class="alert alert-info">
+      <h5 th:text="${message}"></h5>
+    </div>
+  </div>
+
 
   <div classname="container my-5 p-5">
     <form class="col-md-4 offset-md-4" th:action="@{/admin/add_book}" method="post" role="form" th:object="${form}">
@@ -61,71 +69,71 @@
 
       </div>
       <div class="mb-3">
-        <label for="author 1" class="form-label">Author </label>
+        <label for="author 1" class="form-label" th:text="#{form.Author1}">Author* </label>
         <input type="text" class="form-control" name="author" />
         <!-- but name should be author[0].name -->
         <p class="text-danger" th:errors="*{author}" th:if="${#fields.hasErrors('author')}"></p>
       </div>
       <div class="mb-3">
 
-        <label for="author 2 " class="form-label">Author 2 </label>
+        <label for="author 2 " class="form-label" th:text="#{form.Author2}">Author 2 </label>
         <input type="text" class="form-control" name="authors[1].name" />
       </div>
       <div class="mb-3">
 
-        <label for="author 3 " class="form-label">Author 3</label>
+        <label for="author 3 " class="form-label" th:text="#{form.Author3}">Author 3</label>
         <input type="text" class="form-control" name="authors[2].name" />
       </div>
       <div class="mb-3">
-        <label for="isbn_nummer" class="form-label">ISBN Nummer </label>
+        <label for="isbn_nummer" class="form-label" th:text="#{form.Isbn}">ISBN Nummer* </label>
         <input type="text" class="form-control" name="isbnCode" />
         <p class="text-danger" th:errors="*{isbnCode}" th:if="${#fields.hasErrors('isbnCode')}"></p>
       </div>
       <div class="mb-3">
-        <label for="price" class="form-label">Price </label>
+        <label for="price" class="form-label" th:text="#{form.Price}">Price </label>
         <input type="text" class="form-control" name="price" />
       </div>
       <div class="mb-3">
-        <label for="placeCode1" class="form-label">placecode1 </label>
+        <label for="placeCode1" class="form-label" th:text="#{form.placeCode1}">placecode1* </label>
         <input type="text" class="form-control" name="pc1" />
         <p class="text-danger" th:errors="*{pc1}" th:if="${#fields.hasErrors('pc1')}"></p>
       </div>
       <div class="mb-3">
-        <label for="placeCode2" class="form-label">placecode2 </label>
+        <label for="placeCode2" class="form-label" th:text="#{form.placeCode2}">placecode2* </label>
         <input type="text" class="form-control" name="pc2" />
         <p class="text-danger" th:errors="*{pc2}" th:if="${#fields.hasErrors('pc2')}"></p>
       </div>
       <div class="mb-3">
-        <label for="placeName" class="form-label">Location </label>
+        <label for="placeName" class="form-label" th:text="#{form.location1}">Location* </label>
         <input type="text" class="form-control" name="location" />
         <p class="text-danger" th:errors="*{location}" th:if="${#fields.hasErrors('location')}"></p>
       </div>
       <div class="mb-3">
-        <label for="placeCode1" class="form-label">placecode1 </label>
+        <label for="placeCode1" class="form-label" th:text="#{form.placeCode12}">placecode1 </label>
         <input type="text" class="form-control" name="locations[1].placeCode1" />
       </div>
       <div class="mb-3">
-        <label for="placeCode2" class="form-label">placecode2 </label>
+        <label for="placeCode2" class="form-label" th:text="#{form.placeCode22}">placecode2 </label>
         <input type="text" class="form-control" name="locations[1].placeCode2" />
       </div>
       <div class="mb-3">
-        <label for="placeName" class="form-label">Location2 </label>
+        <label for="placeName" class="form-label" th:text="#{form.location2}">Location2 </label>
         <input type="text" class="form-control" name="locations[1].placeName" />
       </div>
       <div class="mb-3">
-        <label for="placeCode1" class="form-label">placecode1 </label>
+        <label for="placeCode1" class="form-label" th:text="#{form.placeCode12}">placecode1 </label>
         <input type="text" class="form-control" name="locations[2].placeCode1" />
       </div>
       <div class="mb-3">
-        <label for="placeCode2" class="form-label">placecode2 </label>
+        <label for="placeCode2" class="form-label" th:text="#{form.placeCode22}">placecode2 </label>
         <input type="text" class="form-control" name="locations[2].placeCode2" />
       </div>
       <div class="mb-3">
-        <label for="placeName" class="form-label">Location3 </label>
+        <label for="placeName" class="form-label" th:text="#{form.location3}">Location3 </label>
         <input type="text" class="form-control" name="locations[2].placeName" />
       </div>
       <center>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" th:text="#{btn.Submit}">Submit</button>
       </center>
     </form>
   </div>

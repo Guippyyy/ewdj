@@ -16,15 +16,13 @@ import com.project.ewdj.service.BookService;
 @RequestMapping(value = "/rest")
 public class BookRestController {
 
-    @Autowired
-    public BookService service;
+    private final BookService service;
+    private final AuthorService aService;
 
     @Autowired
-    public AuthorService aService;
-
-    @GetMapping(value = "/emp/{id}")
-    public Book getBook(@PathVariable("id") Long id) {
-        return service.getBookById(id);
+    public BookRestController(BookService service, AuthorService aService) {
+        this.service = service;
+        this.aService = aService;
     }
 
     @GetMapping(value = "/book/isbn/{isbnCode}")

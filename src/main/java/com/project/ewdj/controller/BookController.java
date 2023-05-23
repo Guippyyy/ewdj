@@ -78,10 +78,8 @@ public class BookController {
 
     @PostMapping("/admin/add_book")
     public String addBook(@ModelAttribute Book book, Model model, @Valid @ModelAttribute("form") FormDto formDto,
-            BindingResult result) {
+            BindingResult result, RedirectAttributes redirAtt) {
 
-        Author a = new Author(formDto.getAuthor());
-        aService.save(a);
         int tel = 0;
         for (Author author : book.getAuthors()) {
 
@@ -98,10 +96,11 @@ public class BookController {
             result.rejectValue("isbnCode", null, "ISBN already registered");
         }
 
-        if (isValidISBN(book.getIsbnCode())) {
+        if (isValidISBN(formDto.getIsbnCode())) {
             System.out.println("Valid ISBN");
         } else {
             System.out.println("Invalid ISBN");
+            result.rejectValue("isbnCode", null, "INVALID ISBN");
         }
 
         if (result.hasErrors()) {
@@ -136,12 +135,14 @@ public class BookController {
             tel2++;
         }
 
+        redirAtt.addFlashAttribute("message", "Book " + book.getBookName() + " added !  ");
+
         return "redirect:/admin/add_book?success";
     }
 
     // this should change
     @GetMapping("/favorites")
-    public String getAllFavoriteBooks(Model model, Model m2) {
+    public String getAllFavoriteBooks(Model model) {
 
         Set<Book> list = fService.getUserFavorites();
         model.addAttribute("book", list);
