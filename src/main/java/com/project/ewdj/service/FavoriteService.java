@@ -3,19 +3,13 @@ package com.project.ewdj.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-
-import javax.print.attribute.HashAttributeSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import com.project.ewdj.entity.Book;
 import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.entity.User;
-import com.project.ewdj.repository.BookRepository;
 import com.project.ewdj.repository.FavoriteRepository;
 import com.project.ewdj.repository.UserRepository;
 

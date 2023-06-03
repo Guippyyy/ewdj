@@ -2,13 +2,10 @@ package com.project.ewdj.service;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.project.ewdj.dto.UserDto;
-import com.project.ewdj.entity.Favorite;
 import com.project.ewdj.entity.Role;
 import com.project.ewdj.entity.User;
 import com.project.ewdj.repository.RoleRepository;

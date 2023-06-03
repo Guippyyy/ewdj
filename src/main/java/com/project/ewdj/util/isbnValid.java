@@ -3,15 +3,13 @@ package com.project.ewdj.util;
 public class isbnValid {
 
     public boolean isValidISBN(String isbn) {
-        // Remove any hyphens or spaces from the ISBN
+
         String cleanedISBN = isbn.replaceAll("[\\s-]", "");
 
-        // Check if the cleaned ISBN has a length of 10 or 13 digits
         if (cleanedISBN.length() != 10 && cleanedISBN.length() != 13) {
             return false;
         }
 
-        // Calculate the check digit based on the ISBN type
         int checkDigit;
         if (cleanedISBN.length() == 10) {
             checkDigit = calculateISBN10CheckDigit(cleanedISBN);
@@ -19,7 +17,6 @@ public class isbnValid {
             checkDigit = calculateISBN13CheckDigit(cleanedISBN);
         }
 
-        // Compare the check digit with the last digit of the ISBN
         char lastDigit = cleanedISBN.charAt(cleanedISBN.length() - 1);
         int lastDigitValue;
         if (lastDigit == 'X' || lastDigit == 'x') {

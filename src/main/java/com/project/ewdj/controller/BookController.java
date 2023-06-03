@@ -140,13 +140,11 @@ public class BookController {
         return "redirect:/admin/add_book?success";
     }
 
-    // this should change
     @GetMapping("/favorites")
     public String getAllFavoriteBooks(Model model) {
 
         Set<Book> list = fService.getUserFavorites();
         model.addAttribute("book", list);
-        // m2.addAttribute(null, list)
         return "favoriteBookList";
     }
 
@@ -243,12 +241,10 @@ public class BookController {
         // Remove any hyphens or spaces from the ISBN
         String cleanedISBN = isbn.replaceAll("[\\s-]", "");
 
-        // Check if the cleaned ISBN has a length of 10 or 13 digits
         if (cleanedISBN.length() != 10 && cleanedISBN.length() != 13) {
             return false;
         }
 
-        // Calculate the check digit based on the ISBN type
         int checkDigit;
         if (cleanedISBN.length() == 10) {
             checkDigit = calculateISBN10CheckDigit(cleanedISBN);
@@ -256,7 +252,6 @@ public class BookController {
             checkDigit = calculateISBN13CheckDigit(cleanedISBN);
         }
 
-        // Compare the check digit with the last digit of the ISBN
         char lastDigit = cleanedISBN.charAt(cleanedISBN.length() - 1);
         int lastDigitValue;
         if (lastDigit == 'X' || lastDigit == 'x') {

@@ -10,8 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.project.ewdj.controller.BookController;
 import com.project.ewdj.dto.FormDto;
 import com.project.ewdj.entity.Book;
@@ -21,9 +19,7 @@ import com.project.ewdj.service.BookService;
 import com.project.ewdj.service.DetailsService;
 import com.project.ewdj.service.FavoriteService;
 import com.project.ewdj.service.LocationService;
-import com.project.ewdj.util.FavoriteUtils;
 import com.project.ewdj.util.HomeListItem;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -108,7 +104,7 @@ class BookControllerTest {
 
     @Test
     void testGetAllFavoriteBooks() {
-        // Mock data
+
         Set<Book> favorites = new HashSet<>();
         Book book1 = new Book();
         Book book2 = new Book();
@@ -116,58 +112,29 @@ class BookControllerTest {
         favorites.add(book2);
         Model model = mock(Model.class);
 
-        // Mock behavior
         when(favoriteService.getUserFavorites()).thenReturn(favorites);
-
-        // Perform the test
         String result = bookController.getAllFavoriteBooks(model);
-
-        // Verify the results
         assertEquals("favoriteBookList", result);
         verify(model, times(1)).addAttribute("book", favorites);
     }
 
     @Test
     void testMostPop() {
-        // Mock data
+
         Favorite favorite1 = new Favorite();
         favorite1.setBook(new Book());
         Favorite favorite2 = new Favorite();
         favorite2.setBook(new Book());
         List<Favorite> favorites = Arrays.asList(favorite1, favorite2);
 
-        // Mock behavior
         when(favoriteService.getFavorites()).thenReturn(favorites);
 
-        // Perform the test
         String viewName = bookController.mostPop(model);
 
-        // Verify the results
         assertEquals("mostPop", viewName);
         verify(model, times(1)).addAttribute(eq("items"), anyList());
         verify(favoriteService, times(1)).getFavorites();
     }
-
-    // @Test
-    // void testShowDetails() {
-    // // Mock data
-    // long bookId = 1L;
-    // Book book = new Book();
-    // book.setId(bookId);
-
-    // // Mock behavior
-    // when(bookService.getBookById(bookId)).thenReturn(book);
-
-    // // Perform the test
-    // String viewName = bookController.showDetails(bookId, model);
-
-    // // Verify the results
-    // assertEquals("bookDetails", viewName);
-    // verify(model, times(1)).addAttribute(eq("loc"), anyList());
-    // verify(model, times(1)).addAttribute(eq("book"), eq(book));
-    // verify(model, times(1)).addAttribute(eq("star"), anyInt());
-    // verify(bookService, times(1)).getBookById(bookId);
-    // }
 
     @Test
     void testDetails() {
